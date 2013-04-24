@@ -1,0 +1,112 @@
+<html lang="en">
+  <head>
+    <title>App-deploy-crate 0.8.0-SNAPSHOT API documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <link href="http://palletops.com" rel="project" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+    <div data-scrollspy="scrollspy" class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <a href="/" class="brand">Pallet</a>
+          <ul class="nav">
+            <li class=""><a href="/doc">Documentation</a></li>
+            <li class=""><a href="/news">News</a></li>
+            <li class=""><a href="/blog">Blog</a></li>
+            <li class=""><a href="https://github.com/pallet/pallet">Code</a></li>
+            <li class=""><a href="/services">Services</a></li>
+            <li class=""><a href="/support">Support</a></li>
+            <li class=""><a href="/contact">Contact</a></li>
+          </ul>
+          <form action="http://www.google.com/search" method="get" class="pull-right">
+            <input placeholder="Search" value="" maxlength="255" name="q" type="text" />
+            <input value="palletops.com" type="hidden" name="sitesearch" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+      <div id="header">
+        <h1><a href="http://palletops.com"><span class="project-title">App-deploy-crate 0.8.0-SNAPSHOT API documentation</span></a></h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="pallet.crate.app-deploy.html">pallet.crate.app-deploy</a><a class="ns-link ns-name" href="pallet.crate.app-deploy.lein.html">pallet.crate.app-deploy.lein</a><a class="ns-link ns-name" href="pallet.crate.app-deploy.maven-repo.html">pallet.crate.app-deploy.maven-repo</a><a class="ns-link ns-name" href="pallet.crate.app-deploy.resolve-artifacts.html">pallet.crate.app-deploy.resolve-artifacts</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-index">
+        <h2 class="project-title">App-deploy-crate 0.8.0-SNAPSHOT API documentation</h2>
+        <div class="doc"><p>A crate to help deploy applications</p>
+</div>
+        <div class="project-namespaces">
+          <div class="namespace">
+            <h3 href="pallet.crate.app-deploy.html" class="ns-link"><a class="ns-link ns-name" href="pallet.crate.app-deploy.html">pallet.crate.app-deploy</a></h3>
+            <div class="doc"><p>A pallet crate to deploy applications</p>
+</div>
+            <div class="index ns-var-links">
+              <p>Public variables and functions:</p>
+              <ul>
+                <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-deploy">deploy</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-server-spec">server-spec</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-service">service</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-settings">settings</a></li>
+              </ul>
+            </div>
+          </div><div class="namespace">
+            <h3 href="pallet.crate.app-deploy.lein.html" class="ns-link"><a class="ns-link ns-name" href="pallet.crate.app-deploy.lein.html">pallet.crate.app-deploy.lein</a></h3>
+            <div class="doc"><p>Resolve artifacts for deploying via lein command line.</p>
+
+<p>Each artifact map should provide at least a <code>:project-path</code> entry. The
+<code>:project-path</code> entry may contain a "%s", which will be replaced with the
+project's version string.</p>
+
+<p>  {:project-path "target/app-%s-standalone.jar"
+   :path  "/opt/myapp/simple-app.jar" ; Path to install to
+                                        ; (relative or absolute)
+   :unpack false}                       ; flag to unpack the artifact</p>
+</div>
+            <div class="index ns-var-links">
+              <p>Public variables and functions:</p>
+              <ul>
+                
+              </ul>
+            </div>
+          </div><div class="namespace">
+            <h3 href="pallet.crate.app-deploy.maven-repo.html" class="ns-link"><a class="ns-link ns-name" href="pallet.crate.app-deploy.maven-repo.html">pallet.crate.app-deploy.maven-repo</a></h3>
+            <div class="doc"><p>Resolve artifacts from maven repositories, using lein style coordinate
+vectors.  Each artifact map should provide at least a :coord entry.</p>
+
+<p>  {:coord [simple-app 0.1.0-SNAPSHOT :classifier standalone]
+   :path  "/opt/myapp/simple-app.jar" ; Path to install to
+                                        ; (relative or absolute)
+   :unpack false}                       ; flag to unpack the artifact</p>
+</div>
+            <div class="index ns-var-links">
+              <p>Public variables and functions:</p>
+              <ul>
+                
+              </ul>
+            </div>
+          </div><div class="namespace">
+            <h3 href="pallet.crate.app-deploy.resolve-artifacts.html" class="ns-link"><a class="ns-link ns-name" href="pallet.crate.app-deploy.resolve-artifacts.html">pallet.crate.app-deploy.resolve-artifacts</a></h3>
+            <div class="doc"><p>Resolve artifacts for deploying</p>
+</div>
+            <div class="index ns-var-links">
+              <p>Public variables and functions:</p>
+              <ul>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>

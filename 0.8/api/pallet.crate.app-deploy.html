@@ -1,0 +1,129 @@
+<html lang="en">
+  <head>
+    <title>pallet.crate.app-deploy documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+    <div data-scrollspy="scrollspy" class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <a href="/" class="brand">Pallet</a>
+          <ul class="nav">
+            <li class=""><a href="/doc">Documentation</a></li>
+            <li class=""><a href="/news">News</a></li>
+            <li class=""><a href="/blog">Blog</a></li>
+            <li class=""><a href="https://github.com/pallet/pallet">Code</a></li>
+            <li class=""><a href="/services">Services</a></li>
+            <li class=""><a href="/support">Support</a></li>
+            <li class=""><a href="/contact">Contact</a></li>
+          </ul>
+          <form action="http://www.google.com/search" method="get" class="pull-right">
+            <input placeholder="Search" value="" maxlength="255" name="q" type="text" />
+            <input value="palletops.com" type="hidden" name="sitesearch" />
+          </form>
+        </div>
+      </div>
+    </div>
+      <div id="header">
+        <h1><a href="http://palletops.com"><span class="project-title">App-deploy-crate 0.8.0-SNAPSHOT API documentation</span></a></h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="pallet.crate.app-deploy.html">pallet.crate.app-deploy</a></li><li class="ns-list"><a class="ns-link ns-name" href="pallet.crate.app-deploy.lein.html">pallet.crate.app-deploy.lein</a></li><li class="ns-list"><a class="ns-link ns-name" href="pallet.crate.app-deploy.maven-repo.html">pallet.crate.app-deploy.maven-repo</a></li><li class="ns-list"><a class="ns-link ns-name" href="pallet.crate.app-deploy.resolve-artifacts.html">pallet.crate.app-deploy.resolve-artifacts</a></li>
+        </ul>
+      </div>
+      <div id="vars" class="sidebar">
+        <h3>Public Vars</h3>
+        <ul class="ns-var-links">
+          <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-deploy">deploy</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-server-spec">server-spec</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-service">service</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="pallet.crate.app-deploy.html#var-settings">settings</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-docs">
+        <h2 class="namespace-title">pallet.crate.app-deploy documentation</h2>
+        <div class="doc"><p>A pallet crate to deploy applications</p>
+</div>
+        <div class="ns-vars">
+          <div class="public">
+            <h3><a id="var-deploy" class="source var-name" href="https://github.com/pallet/app-deploy-crate/blob/develop/src/pallet/crate/app_deploy.clj#L101">deploy</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[resolve-method {:keys [instance-id], :as options}]</div>
+            
+            
+            <div class="doc"><p>Deploy an application</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-server-spec" class="source var-name" href="https://github.com/pallet/app-deploy-crate/blob/develop/src/pallet/crate/app_deploy.clj#L145">server-spec</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:as settings} &amp; {:keys [instance-id], :as options}]</div>
+            
+            
+            <div class="doc"><p>Define a server spec for an application.</p>
+
+<p>The deploy phase is defined to deploy the application, either from a lein
+project, or from artifacts in a maven repository.</p>
+
+<p>To control the application, the server-spec has phases for start, stop and
+restart, as well as application specific start-<app>, stop-<app> and
+restart-<app>.</app></app></app></p>
+
+<p>Settings are as described in the <code>settings</code> function.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-service" class="source var-name" href="https://github.com/pallet/app-deploy-crate/blob/develop/src/pallet/crate/app_deploy.clj#L127">service</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[&amp; {:keys [action if-flag if-stopped instance-id], :or {action :manage}, :as options}]</div>
+            
+            
+            <div class="doc"><p>Run an application under service management.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-settings" class="source var-name" href="https://github.com/pallet/app-deploy-crate/blob/develop/src/pallet/crate/app_deploy.clj#L40">settings</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [app-root runit run-command supervisor user artifacts], :as settings} {:keys [instance-id], :as options}]</div>
+            
+            
+            <div class="doc"><p>Settings for an application.</p>
+
+<p><code>:app-root</code>
+: the root of the install location (default /opt)</p>
+
+<p><code>:artifacts</code>
+: a sequence of artifact maps.  An artifact map is keyed on resolver,
+  with :from-lein and :from-maven-repo resolvers being supported.  All resolvers
+  accept a <code>:path</code>, which is the path relative to <code>:app-root</code> or an absolute
+  path, and optionally an <code>:unpack</code> flag, which can be set to unpack an archive.
+  The <code>:from-lein</code> resolver expects a <code>:project-path</code>, a path to a project
+  artifact, which may contain a "%s" which will be substituted with the
+  project version.  The <code>:from-maven-repo</code> resolver expects a <code>:coord</code>, which is
+  a leiningen style coordinate vector.</p>
+
+<p><code>:repositories</code>
+: a map of leiningen style repository definitions, used by the
+  <code>:from-maven-repo</code> resolver.</p>
+
+<p><code>:supervision</code>
+: a keyword selecting the supervision service to be used.  Defaults to
+  <code>:runit</code>.</p>
+
+<p><code>:run-command</code>
+: a string that can be used as a command to start the application.</p>
+
+<p><code>:user</code>
+: the user to use for running the application.</p>
+</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>
