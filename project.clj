@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [com.palletops/maven-resolver "0.1.0"]
-                 [com.palletops/pallet "0.8.0-beta.9"]]
+                 [com.palletops/pallet "0.8.0-beta.10"]]
   :resource {:resource-paths ["doc-src"]
              :target-path "target/classes/pallet_crate/app_deploy_crate/"
              :includes [#"doc-src/USAGE.*"]}
