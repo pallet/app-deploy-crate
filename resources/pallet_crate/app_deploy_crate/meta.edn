@@ -1,4 +1,4 @@
-{:header "App Deploy"
+{:header "app deploy"
  :title
  "A [pallet](http://palletops.com/) crate to install and control applications."
  :git-repo "https://github.com/pallet/app-deploy-crate"
