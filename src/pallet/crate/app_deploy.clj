@@ -104,7 +104,7 @@
   (let [{:keys [app-root artifacts user] :as settings} (get-settings
                                                         :app-deploy options)
         resolve-method (or resolve-method (key (first artifacts)))
-        project (get-environment [:project])
+        project (get-environment [:project] {})
         artifacts (resolve-artifacts
                    resolve-method (get artifacts resolve-method)
                    (merge
