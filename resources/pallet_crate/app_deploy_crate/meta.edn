@@ -1,4 +1,4 @@
-{:header "App Deploy"
+{:header "app deploy"
  :title
  "A [pallet](http://palletops.com/) crate to install and control applications."
  :git-repo "https://github.com/pallet/app-deploy-crate"
@@ -7,4 +7,4 @@
  :tag-prefix ""
  :artifact-id "app-deploy-crate"
  :source-path "src/pallet/crate/app-deploy.clj"
- :versions [{:pallet "0.8.0-beta.9" :version "0.8.0-alpha.1"}]}
+ :versions [{:pallet "0.8.0-beta.10" :version "0.8.0-alpha.2"}]}

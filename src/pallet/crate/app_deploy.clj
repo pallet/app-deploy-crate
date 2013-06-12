@@ -24,11 +24,12 @@
    :app-root "/opt"})
 
 (defmethod supervisor-config-map [:app-deploy :runit]
-  [_ {:keys [run-command service-name user] :as settings} options]
+  [_ {:keys [run-command service-name user service-log-dir] :as settings} options]
   {:pre [service-name]}
   (debugf "supervisor-config-map %s" settings)
   {:service-name service-name
-   :run-file {:content (str "#!/bin/sh\nexec chpst -u " user " " run-command)}})
+   :run-file {:content (str "#!/bin/sh\nexec chpst -u " user " " run-command)}
+   :log-run-file {:content (str "#!/bin/sh\nexec chpst -u " user " svlogd -tt " service-log-dir)}})
 
 (defmethod supervisor-config-map [:app-deploy :nohup]
   [_ {:keys [run-command service-name user] :as settings} options]
@@ -73,7 +74,11 @@
         settings (-> settings
                      (update-in [:user] #(or % (:username (admin-user))))
                      (update-in [:service-name]
-                                #(or % (name (or instance-id :default-app)))))]
+                                #(or % (name (or instance-id :default-app))))
+                     (update-in [:service-log-dir]
+                                #(str "/var/log/"
+                                      (or % (name (or instance-id
+                                                      :default-app))))))]
     (assoc-settings :app-deploy settings options)
     (supervisor-config
      :app-deploy settings
@@ -104,7 +109,7 @@
   (let [{:keys [app-root artifacts user] :as settings} (get-settings
                                                         :app-deploy options)
         resolve-method (or resolve-method (key (first artifacts)))
-        project (get-environment [:project])
+        project (get-environment [:project] {})
         artifacts (resolve-artifacts
                    resolve-method (get artifacts resolve-method)
                    (merge
@@ -163,8 +168,16 @@ Settings are as described in the `settings` function."
      :phases (merge
               {:settings (plan-fn
                            (pallet.crate.app-deploy/settings settings options))
+
                :configure (plan-fn
-                            (apply-map service :action :enable options))
+
+                           (let [{:keys [service-log-dir user]}
+                                 (get-settings :app-deploy
+                                               {:instance-id
+                                                (or instance-id :default-app)})]
+                             (directory service-log-dir :owner user))
+
+                           (apply-map service :action :enable options))
                :deploy (fn
                          ([] (deploy nil options))
                          ([from] (deploy (from-key from) options)))}

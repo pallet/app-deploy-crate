@@ -1,5 +1,5 @@
 {:dev
- {:dependencies [[com.palletops/pallet "0.8.0-beta.9" :classifier "tests"]
+ {:dependencies [[com.palletops/pallet "0.8.0-beta.10" :classifier "tests"]
                  [com.palletops/crates "0.1.0"]
                  [com.palletops/java-crate "0.8.0-beta.4"]
                  [com.palletops/runit-crate "0.8.0-alpha.1"]
