@@ -3028,8 +3028,8 @@ net.brehaut.ClojureTools = (function (SH) {
     build_tree: build_tree
   };
 })(SyntaxHighlighter);
-</script><title>com.palletops/app-deploy-crate -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name">com.palletops/app-deploy-crate</h1><h2 class="project-version">0.8.0-SNAPSHOT</h2><br /><p>A crate to help deploy applications</p>
-</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.5.1</td></tr><tr><td class="dep-name">com.palletops/maven-resolver</td><td class="dotted"><hr /></td><td class="dep-version">0.1.0</td></tr><tr><td class="dep-name">com.palletops/pallet</td><td class="dotted"><hr /></td><td class="dep-version">0.8.0-beta.9</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#pallet.crate.app-deploy">pallet.crate.app-deploy</a></li><li><a href="#pallet.crate.app-deploy.lein">pallet.crate.app-deploy.lein</a></li><li><a href="#pallet.crate.app-deploy.maven-repo">pallet.crate.app-deploy.maven-repo</a></li><li><a href="#pallet.crate.app-deploy.resolve-artifacts">pallet.crate.app-deploy.resolve-artifacts</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#pallet.crate.app-deploy" name="pallet.crate.app-deploy"><h1 class="project-name">pallet.crate.app-deploy</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>A pallet crate to deploy applications</p>
+</script><title>com.palletops/app-deploy-crate -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name">com.palletops/app-deploy-crate</h1><h2 class="project-version">0.8.0-alpha.2</h2><br /><p>A crate to help deploy applications</p>
+</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.5.1</td></tr><tr><td class="dep-name">com.palletops/maven-resolver</td><td class="dotted"><hr /></td><td class="dep-version">0.1.0</td></tr><tr><td class="dep-name">com.palletops/pallet</td><td class="dotted"><hr /></td><td class="dep-version">0.8.0-beta.10</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#pallet.crate.app-deploy">pallet.crate.app-deploy</a></li><li><a href="#pallet.crate.app-deploy.lein">pallet.crate.app-deploy.lein</a></li><li><a href="#pallet.crate.app-deploy.maven-repo">pallet.crate.app-deploy.maven-repo</a></li><li><a href="#pallet.crate.app-deploy.resolve-artifacts">pallet.crate.app-deploy.resolve-artifacts</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#pallet.crate.app-deploy" name="pallet.crate.app-deploy"><h1 class="project-name">pallet.crate.app-deploy</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>A pallet crate to deploy applications</p>
 </td><td class="codes"><pre class="brush: clojure">(ns pallet.crate.app-deploy
   (:require
    [clojure.java.io :refer [file]]
@@ -3053,11 +3053,12 @@ net.brehaut.ClojureTools = (function (SH) {
   {:supervisor :runit
    :app-root &quot;/opt&quot;})</pre></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defmethod supervisor-config-map [:app-deploy :runit]
-  [_ {:keys [run-command service-name user] :as settings} options]
+  [_ {:keys [run-command service-name user service-log-dir] :as settings} options]
   {:pre [service-name]}
   (debugf &quot;supervisor-config-map %s&quot; settings)
   {:service-name service-name
-   :run-file {:content (str &quot;#!/bin/sh\nexec chpst -u &quot; user &quot; &quot; run-command)}})</pre></td></tr><tr><td class="docs">
+   :run-file {:content (str &quot;#!/bin/sh\nexec chpst -u &quot; user &quot; &quot; run-command)}
+   :log-run-file {:content (str &quot;#!/bin/sh\nexec chpst -u &quot; user &quot; svlogd -tt &quot; service-log-dir)}})</pre></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defmethod supervisor-config-map [:app-deploy :nohup]
   [_ {:keys [run-command service-name user] :as settings} options]
   {:pre [service-name]}
@@ -3099,7 +3100,11 @@ net.brehaut.ClojureTools = (function (SH) {
         settings (-&gt; settings
                      (update-in [:user] #(or % (:username (admin-user))))
                      (update-in [:service-name]
-                                #(or % (name (or instance-id :default-app)))))]
+                                #(or % (name (or instance-id :default-app))))
+                     (update-in [:service-log-dir]
+                                #(str &quot;/var/log/&quot;
+                                      (or % (name (or instance-id
+                                                      :default-app))))))]
     (assoc-settings :app-deploy settings options)
     (supervisor-config
      :app-deploy settings
@@ -3127,7 +3132,7 @@ net.brehaut.ClojureTools = (function (SH) {
   (let [{:keys [app-root artifacts user] :as settings} (get-settings
                                                         :app-deploy options)
         resolve-method (or resolve-method (key (first artifacts)))
-        project (get-environment [:project])
+        project (get-environment [:project] {})
         artifacts (resolve-artifacts
                    resolve-method (get artifacts resolve-method)
                    (merge
@@ -3181,7 +3186,12 @@ restart-<app>.</p>
               {:settings (plan-fn
                            (pallet.crate.app-deploy/settings settings options))
                :configure (plan-fn
-                            (apply-map service :action :enable options))
+                           (let [{:keys [service-log-dir user]}
+                                 (get-settings :app-deploy
+                                               {:instance-id
+                                                (or instance-id :default-app)})]
+                             (directory service-log-dir :owner user))
+                           (apply-map service :action :enable options))
                :deploy (fn
                          ([] (deploy nil options))
                          ([from] (deploy (from-key from) options)))}
