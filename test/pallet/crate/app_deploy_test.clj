@@ -4,6 +4,7 @@
    [pallet.api :refer [group-spec plan-fn]]
    [pallet.actions :refer [exec-script*]]
    [pallet.crate.app-deploy :as app-deploy]
+   [pallet.crate.app-deploy.resolve-artifacts :refer [resolve-artifacts]]
    [pallet.crate.java :as java]
    [pallet.crate.runit :as runit]
    [pallet.script-test :refer [is-true testing-script]]))
@@ -44,3 +45,17 @@
                          (file-exists? "/etc/sv/second/run")
                          "Verify named app service"))))}
     :roles #{:live-test :deploy}))
+
+(deftest resolve-artifacts-test
+  (is (every? (comp string? :local-file)
+              (resolve-artifacts
+                :from-maven-repo
+                [{:coord '[com.palletops/maven-resolver "0.1.0"]
+                  :path "resolver.jar"}]
+                {:repositories {}})))
+  (is (every? (comp string? :local-file)
+              (resolve-artifacts
+                :from-lein
+                [{:project-path "target/app-deploy-crate-%s.jar"
+                  :path "example.jar"}]
+                {:project {}}))))
