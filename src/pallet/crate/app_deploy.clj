@@ -45,14 +45,15 @@
 : the root of the install location (default /opt)
 
 `:artifacts`
-: a sequence of artifact maps.  An artifact map is keyed on resolver,
-  with :from-lein and :from-maven-repo resolvers being supported.  All resolvers
-  accept a `:path`, which is the path relative to `:app-root` or an absolute
-  path, and optionally an `:unpack` flag, which can be set to unpack an archive.
-  The `:from-lein` resolver expects a `:project-path`, a path to a project
-  artifact, which may contain a \"%s\" which will be substituted with the
-  project version.  The `:from-maven-repo` resolver expects a `:coord`, which is
-  a leiningen style coordinate vector.
+
+: a sequence of artifact maps.  An artifact map is keyed on resolver, with
+  `:from-lein` and `:from-maven-repo` resolvers being supported.  All resolvers
+  accept a sequence of maps.  Each map specifies a `:path`, which is the path
+  relative to `:app-root` or an absolute path, and optionally an `:unpack` flag,
+  which can be set to unpack an archive.  The `:from-lein` resolver expects a
+  `:project-path`, a path to a project artifact, which may contain a \"%s\"
+  which will be substituted with the project version.  The `:from-maven-repo`
+  resolver expects a `:coord`, which is a leiningen style coordinate vector.
 
 `:repositories`
 : a map of leiningen style repository definitions, used by the

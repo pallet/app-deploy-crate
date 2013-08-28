@@ -9,7 +9,7 @@ A [pallet](http://palletops.com/) crate to install and control applications.
 ### Dependency Information
 
 ```clj
-:dependencies [[com.palletops/app-deploy-crate "0.8.0-alpha.2"]]
+:dependencies [[com.palletops/app-deploy-crate "0.8.0-alpha.3"]]
 ```
 
 ### Releases
@@ -21,11 +21,11 @@ A [pallet](http://palletops.com/) crate to install and control applications.
 <tbody>
   <tr>
     <th>0.8.0-beta.10</th>
-    <td>0.8.0-alpha.2</td>
+    <td>0.8.0-alpha.3</td>
     <td>clojars</td>
     <td>com.palletops</td>
-    <td><a href='https://github.com/pallet/app-deploy-crate/blob/0.8.0-alpha.2/ReleaseNotes.md'>Release Notes</a></td>
-    <td><a href='https://github.com/pallet/app-deploy-crate/blob/0.8.0-alpha.2/'>Source</a></td>
+    <td><a href='https://github.com/pallet/app-deploy-crate/blob/0.8.0-alpha.3/ReleaseNotes.md'>Release Notes</a></td>
+    <td><a href='https://github.com/pallet/app-deploy-crate/blob/0.8.0-alpha.3/'>Source</a></td>
   </tr>
 </tbody>
 </table>

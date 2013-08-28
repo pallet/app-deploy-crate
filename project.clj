@@ -1,4 +1,4 @@
-(defproject com.palletops/app-deploy-crate "0.8.0-alpha.2"
+(defproject com.palletops/app-deploy-crate "0.8.0-alpha.3"
   :description "A crate to help deploy applications"
   :url "http://palletops.com/"
   :license {:name "Eclipse Public License"

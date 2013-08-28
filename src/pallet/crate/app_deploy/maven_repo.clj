@@ -17,7 +17,8 @@ vectors.  Each artifact map should provide at least a :coord entry.
   [_ artifact-maps {:keys [repositories local-repo] :as options}]
   (debugf "Deploy from maven-repo repositories : %s" (vec repositories))
   (let [coords (vec (map :coord artifact-maps))
-        resolved (resolve-coordinates coords options)]
+        resolved (resolve-coordinates coords options)
+        normalize #(if (instance? java.io.File %) (.getCanonicalPath %) %)]
     (debugf "Deploy from maven-repo resolve-config coords : %s  resolved : %s"
             coords resolved)
-    (mapv #(assoc %1 :local-file %2) artifact-maps resolved)))
+    (mapv #(assoc %1 :local-file (normalize %2)) artifact-maps resolved)))
